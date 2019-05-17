@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = navController
         self.window?.makeKeyAndVisible()
         
-        FlowCoordinator.shared.navigate(source: navController, flow: MovieFlow.start)
+        FlowCoordinator.shared.navigate(source: navController, flow: MovieFlow.movies)
         
     }
 

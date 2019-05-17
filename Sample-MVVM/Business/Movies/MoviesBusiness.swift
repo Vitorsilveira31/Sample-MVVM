@@ -19,24 +19,11 @@ class MoviesBusiness {
     convenience init() {
         self.init(provider: MoviesService())
     }
-    
-    func popular(page: String, completion: @escaping (Result<String, Error>) -> Void) {
-        // self.provider
-    }
 
-    func details(movieId: String, completion: @escaping (Result<String, Error>) -> Void) {
-        // self.provider
-    }
+    var page: Int = 0
     
-    func favorite(movie: String, completion: @escaping (Bool) -> Void) {
-        // self.provider
-    }
-    
-    func unfavorite(movie: String, completion: @escaping (Bool) -> Void) {
-        // self.provider
-    }
-    
-    func isFavorite(movie: String, completion: @escaping (Bool) -> Void) {
-        // self.provider
+    func popular(isFirstPage: Bool = false, completion: @escaping (Result<Movies, Error>) -> Void) {
+        self.page = isFirstPage ? 1 : (self.page + 1)
+        self.provider.popular(page: self.page, completion: completion)
     }
 }

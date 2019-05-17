@@ -9,28 +9,28 @@
 import UIKit
 
 enum MovieFlow {
-    case start
-    case toDetail
+    case movies
+    case details(movie: Movie)
 }
 
 extension MovieFlow: Flow {
     var destination: UIViewController {
         switch self {
-        case .start:
+        case .movies:
             // Aqui nós podemos verificar a partir do command launch se for teste ai fazemos o mock do serviço
             let vc = ListViewController.instantiate(with: ListViewModel(MoviesBusiness()))
             return vc
-        case .toDetail:
-            let viewController = UIStoryboard(name: "DetailMovie", bundle: nil).instantiateViewController(withIdentifier: "DetailMovie")
-            return viewController
+        case .details(let movie):
+            let vc = DetailsMovieViewController.instantiate(with: DetailsViewModel(), movie: movie)
+            return vc
         }
     }
     
     var showBackButton: Bool {
         switch self {
-        case .start:
+        case .movies:
             return false
-        case .toDetail:
+        case .details:
             return true
         }
     }
